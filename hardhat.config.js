@@ -1,10 +1,12 @@
-require("@nomiclabs/hardhat-waffle")
-require("@nomiclabs/hardhat-etherscan")
+require("@nomicfoundation/hardhat-toolbox")
+require("dotenv").config()
+require("hardhat-gas-reporter")
 require("hardhat-deploy")
 require("solidity-coverage")
-require("hardhat-gas-reporter")
-require("hardhat-contract-sizer")
-require("dotenv").config()
+require("@nomiclabs/hardhat-ethers")
+const { setGlobalDispatcher, ProxyAgent } = require("undici")
+const proxyAgent = new ProxyAgent("http://127.0.0.1:7890")
+setGlobalDispatcher(proxyAgent)
 
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL
 const SEPOLIA_PRIVATE_KEY = process.env.SEPOLIA_PRIVATE_KEY
@@ -27,15 +29,10 @@ module.exports = {
             chainId: 31337,
         },
     },
-    solidity: "0.8.19",
-    nameAccounts: {
-        deployer: {
-            default: 0,
-        },
-        palyer: {
-            default: 1,
-        },
+    solidity: {
+        compilers: [{ version: "0.8.8" }, { version: "0.6.6" }],
     },
+
     gasReporter: {
         enabled: false,
         //outputFile: "gas-report.txt",
@@ -48,5 +45,14 @@ module.exports = {
     etherscan: {
         apiKey: ETHERSCAN_API_KEY,
         timeout: 600000,
+    },
+    namedAccounts: {
+        deployer: {
+            default: 0,
+            31337: 0,
+        },
+        users: {
+            default: 0,
+        },
     },
 }

@@ -140,7 +140,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
         uint256 /*requestId*/,
         uint256[] memory randomWords
     ) internal override {
-        uint256 indexOfWinner = randomWords[0] % s_players.length;
+        uint256 indexOfWinner = randomWords[0] % (s_players.length);
         address payable recentWinner = s_players[indexOfWinner];
         s_recentWinnner = recentWinner;
         s_raffleState = RaffleState.OPEN;
