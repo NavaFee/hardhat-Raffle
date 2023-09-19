@@ -11,3 +11,9 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
+
+1. Get our SubId for Chainlink VRF
+2. Deploy our contract using the SubId
+3. Register the contract with Chainlink VRF & it's SubId
+4. Register the contract with chainlink Keepers
+5. Run staging tests

@@ -5,7 +5,6 @@ const {
     networkConfig,
 } = require("../../helper-hardhat-config")
 const { assert, expect } = require("chai")
-const { getBytes, isBytesLike } = require("ethers")
 !developmentChains.includes(network.name)
     ? describe.skip
     : describe("Raffle Unit Tests", async function () {
